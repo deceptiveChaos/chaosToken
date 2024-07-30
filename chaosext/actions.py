@@ -2,8 +2,6 @@
 import pathlib
 import paramiko
 
-from chaoslib.types import Configuration, Secrets
-
 __all__ = [
     'create_local_file',
     'send_file_over_ssh',

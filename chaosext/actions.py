@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import pathlib
 import paramiko
+import pathlib
 
 __all__ = [
     'create_local_file',

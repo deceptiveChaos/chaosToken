@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 import os
 import tempfile
-# from chaosext.actions import create_local_file
+from chaosext.actions import create_local_file
 
 def test_create_local_file():
     # Create a temporary file
     with tempfile.NamedTemporaryFile() as tmp:
         file_path = tmp.name
-        file_content = "Hello, World!" #This will be changed to pull the fake files from the folder to send out.
+        file_content = "Hello, World!"
         create_local_file(file_path, file_content)
         assert os.path.exists(file_path)
         with open(file_path, 'r') as f:

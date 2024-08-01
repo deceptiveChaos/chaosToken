@@ -44,6 +44,7 @@ def create_and_send_files(
     username: str, 
     password: str, 
     remote_folder: str
+    remote_subfolders: list
 ) -> None:
     folder_path = pathlib.Path(folder_path)
     remote_folder = pathlib.Path(remote_folder)
@@ -53,11 +54,14 @@ def create_and_send_files(
     # Randomly select the files to send
     files_to_send = random.sample(files, num_files_to_send)  
     
+    remote_subfolder_name = random.choice(remote_subfolders)
+    remote_subfolder = remote_folder / remote_subfolder_name
+
     for file in files_to_send:
         send_file_over_ssh(
             str(file), 
             host, 
             username, 
             password, 
-            str(remote_folder)
+            str(remote_subfolder)
         )

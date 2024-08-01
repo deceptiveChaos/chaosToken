@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 import paramiko
 import pathlib
+import random
 
 __all__ = [
-    'create_local_file',
+    'create_local_files',
     'send_file_over_ssh',
-    'create_and_send_file'
+    'create_and_send_files'
 ]
 
 """def create_local_file(file_path: str, file_content: str) -> str:
@@ -16,7 +17,7 @@ __all__ = [
         f.write(file_content)
     return file_path"""
 
-def create_local_file(folder_path: pathlib.Path) -> list:
+def create_local_files(folder_path: pathlib.Path) -> list:
     files = []
     for file in folder_path.iterdir():
         files.append(file)
@@ -49,9 +50,17 @@ def create_and_send_files(
     remote_folder: pathlib.Path
 ) -> None:
     files = create_local_file(folder_path)
-    num_files_to_send = random.randint(1, len(files))  # Randomly select the number of files to send
-    files_to_send = random.sample(files, num_files_to_send)  # Randomly select the files to send
+    # Randomly select the number of files to send
+    num_files_to_send = random.randint(1, len(files))
+    # Randomly select the files to send
+    files_to_send = random.sample(files, num_files_to_send)  
     
     for file in files_to_send:
         remote_file_path = remote_folder / file.name
-        send_file_over_ssh(file, host, username, password, remote_file_path)
+        send_file_over_ssh(
+            file, 
+            host, 
+            username, 
+            password, 
+            remote_file_path
+            )

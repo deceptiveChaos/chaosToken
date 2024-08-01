@@ -49,10 +49,6 @@ def create_and_send_files(
     folder_path = pathlib.Path(folder_path)
     remote_folder = pathlib.Path(remote_folder)
     files = create_local_files(folder_path)
-    # Randomly select the number of files to send
-    num_files_to_send = random.randint(1, len(files))
-    # Randomly select the files to send
-    files_to_send = random.sample(files, num_files_to_send)  
     
     remote_subfolder_name = random.choice(remote_subfolders)
     remote_subfolder = remote_folder / remote_subfolder_name

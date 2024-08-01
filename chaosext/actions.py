@@ -49,11 +49,10 @@ def create_and_send_files(
     folder_path = pathlib.Path(folder_path)
     remote_folder = pathlib.Path(remote_folder)
     files = create_local_files(folder_path)
-    
-    remote_subfolder_name = random.choice(remote_subfolders)
-    remote_subfolder = remote_folder / remote_subfolder_name
 
     for file in files:
+        remote_subfolder_name = random.choice(remote_subfolders)
+        remote_subfolder = remote_folder / remote_subfolder_name
         send_file_over_ssh(
             str(file), 
             host, 

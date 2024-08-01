@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import paramiko
 import pathlib
-import os 
 
 __all__ = [
     'create_local_file',
@@ -19,9 +18,8 @@ __all__ = [
 
 def create_local_file(folder_path: str) -> list:
     files = []
-    for file in os.listdir(folder_path):
-        file_path = os.path.join(folder_path, file)
-        files.append(file_path)
+    for file in folder_path.iterdir():
+        files.append(file)
     return files
 
 def send_file_over_ssh(

@@ -19,7 +19,7 @@ environment where [chaostoolkit][] already lives.
 [chaostoolkit]: https://github.com/chaostoolkit/chaostoolkit
 
 ```
-$ pip install chaostoolkit-chaosToken
+$ pip install chaostoolkit-<your extension name>
 ```
 
 

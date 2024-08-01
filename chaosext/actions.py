@@ -53,7 +53,7 @@ def create_and_send_files(
     remote_subfolder_name = random.choice(remote_subfolders)
     remote_subfolder = remote_folder / remote_subfolder_name
 
-    for file in files_to_send:
+    for file in files:
         send_file_over_ssh(
             str(file), 
             host, 

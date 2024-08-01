@@ -41,19 +41,17 @@ def send_file_over_ssh(
     finally:
         ssh.close()
 
-def create_and_send_file(
-    file_path: str, 
-    file_content: str, 
+def create_and_send_files(
+    folder_path: pathlib.Path, 
     host: str, 
     username: str, 
-    password: str
-) -> str:
-    file_path = create_local_file(file_path, file_content)
+    password: str, 
+    remote_folder: pathlib.Path
+) -> None:
+    files = create_local_file(folder_path)
+    num_files_to_send = random.randint(1, len(files))  # Randomly select the number of files to send
+    files_to_send = random.sample(files, num_files_to_send)  # Randomly select the files to send
     
-    send_file_over_ssh(
-        file_path, 
-        host, 
-        username, 
-        password
-    )
-    return file_path
+    for file in files_to_send:
+        remote_file_path = remote_folder / file.name
+        send_file_over_ssh(file, host, username, password, remote_file_path)

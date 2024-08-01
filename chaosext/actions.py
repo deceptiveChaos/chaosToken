@@ -43,7 +43,7 @@ def create_and_send_files(
     host: str, 
     username: str, 
     password: str, 
-    remote_folder: str
+    remote_folder: str,
     remote_subfolders: list
 ) -> None:
     folder_path = pathlib.Path(folder_path)

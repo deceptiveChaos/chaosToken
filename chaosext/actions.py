@@ -9,15 +9,8 @@ __all__ = [
     'create_and_send_files'
 ]
 
-"""def create_local_file(file_path: str, file_content: str) -> str:
-    file_dir = pathlib.Path(file_path).parent
-    if not file_dir.exists():
-        file_dir.mkdir(parents=True)
-    with open(file_path, 'w') as f:
-        f.write(file_content)
-    return file_path"""
-
-def create_local_files(folder_path: pathlib.Path) -> list:
+def create_local_files(folder_path: str) -> list:
+    folder_path = pathlib.Path(folder_path)
     files = []
     for file in folder_path.iterdir():
         files.append(file)
@@ -38,17 +31,20 @@ def send_file_over_ssh(
             password=password
         )
         sftp = ssh.open_sftp()
-        sftp.put(file_path, file_path)
+        file_path = pathlib.Path(file_path)
+        sftp.put(str(file_path), str(file_path))
     finally:
         ssh.close()
 
 def create_and_send_files(
-    folder_path: pathlib.Path, 
+    folder_path: str, 
     host: str, 
     username: str, 
     password: str, 
-    remote_folder: pathlib.Path
+    remote_folder: str
 ) -> None:
+    folder_path = pathlib.Path(folder_path)
+    remote_folder = pathlib.Path(remote_folder)
     files = create_local_files(folder_path)
     # Randomly select the number of files to send
     num_files_to_send = random.randint(1, len(files))
@@ -58,9 +54,8 @@ def create_and_send_files(
     for file in files_to_send:
         remote_file_path = remote_folder / file.name
         send_file_over_ssh(
-            file, 
+            str(file), 
             host, 
             username, 
-            password, 
-            remote_file_path
-            )
+            password
+        )

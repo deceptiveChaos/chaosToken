@@ -16,7 +16,7 @@ __all__ = [
         f.write(file_content)
     return file_path"""
 
-def create_local_file(folder_path: str) -> list:
+def create_local_file(folder_path: pathlib.Path) -> list:
     files = []
     for file in folder_path.iterdir():
         files.append(file)

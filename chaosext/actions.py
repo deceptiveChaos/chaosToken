@@ -20,7 +20,8 @@ def send_file_over_ssh(
     file_path: str, 
     host: str, 
     username: str, 
-    password: str
+    password: str, 
+    remote_folder: str
 ) -> None:
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -32,7 +33,8 @@ def send_file_over_ssh(
         )
         sftp = ssh.open_sftp()
         file_path = pathlib.Path(file_path)
-        sftp.put(str(file_path), str(file_path))
+        remote_file_path = str(pathlib.Path(remote_folder) / file_path.name)
+        sftp.put(str(file_path), remote_file_path)
     finally:
         ssh.close()
 
@@ -52,10 +54,10 @@ def create_and_send_files(
     files_to_send = random.sample(files, num_files_to_send)  
     
     for file in files_to_send:
-        remote_file_path = remote_folder / file.name
         send_file_over_ssh(
             str(file), 
             host, 
             username, 
-            password
+            password, 
+            str(remote_folder)
         )

@@ -6,7 +6,8 @@ import random
 __all__ = [
     'create_local_files',
     'send_file_over_ssh',
-    'create_and_send_files'
+    'send_files_to_host',
+    'send_files_to_hosts'
 ]
 
 def create_local_files(folder_path: str) -> list:
@@ -38,7 +39,7 @@ def send_file_over_ssh(
     finally:
         ssh.close()
 
-def create_and_send_files(
+def send_files_to_host(
     folder_path: str, 
     host: str, 
     username: str, 
@@ -60,3 +61,29 @@ def create_and_send_files(
             password, 
             str(remote_subfolder)
         )
+
+def send_files_to_hosts(
+    folder_path: str, 
+    hosts: list, 
+    remote_folder: str,
+    remote_subfolders: list
+) -> None:
+    folder_path = pathlib.Path(folder_path)
+    remote_folder = pathlib.Path(remote_folder)
+    files = create_local_files(folder_path)
+
+    for host in hosts:
+        host_ip = host['host']
+        username = host['username']
+        password = host['password']
+
+        for file in files:
+            remote_subfolder_name = random.choice(remote_subfolders)
+            remote_subfolder = remote_folder / remote_subfolder_name
+            send_file_over_ssh(
+                str(file), 
+                host_ip, 
+                username, 
+                password, 
+                str(remote_subfolder)
+            )

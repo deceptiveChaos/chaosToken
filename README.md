@@ -26,21 +26,21 @@ $ pip install git+https://github.com/deceptiveChaos/chaosToken.git
 <Explain your probes and actions usage from the experiment.json here>
 
 To use the probes and actions from this package, add the following to your experiment file:
-```
+```json
 {
-      "type": "action",
-      "name": "deploy-token",
-      "provider": {
+    "type": "action",
+    "name": "deploy-token",
+    "provider": {
         "type": "python",
         "module": "chaosext.actions",
         "func": "send_files_to_host",
         "arguments": {
-          "folder_path": "fake_files",
-          "host": "192.168.163.128",
-          "username": "kali",
-          "password": "kali",
-          "remote_folder": "Home",
-          "remote_subfolder": ["Desktop","Documents","Downloads"]
+            "folder_path": "fake_files",
+            "host": "192.168.163.128",
+            "username": "kali",
+            "password": "kali",
+            "remote_folder": "Home",
+            "remote_subfolder": ["Desktop","Documents","Downloads"]
         }
       }
     }

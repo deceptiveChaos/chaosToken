@@ -73,16 +73,16 @@ def send_files_to_hosts(
         host_ip = host['host']
         username = host['username']
         password = host['password']
-        remote_folder = host['remote_folder']  # Get remote folder from host config
-        remote_subfolders = host['remote_subfolders']  # Get remote subfolders from host config
+        remote_folder = host['remote_folder']
+        remote_subfolders = host['remote_subfolders']
 
         for file in files:
-            remote_subfolder_name = random.choice(remote_subfolders)
-            remote_subfolder = pathlib.Path(remote_folder) / remote_subfolder_name
+            subfolder_name = random.choice(remote_subfolders)
+            remote_subfolder = pathlib.Path(remote_folder) / subfolder_name
             send_file_over_ssh(
-                str(file), 
-                host_ip, 
-                username, 
-                password, 
+                str(file),
+                host_ip,
+                username,
+                password,
                 str(remote_subfolder)
             )

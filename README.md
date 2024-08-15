@@ -1,4 +1,4 @@
-# Chaos Toolkit Extension Template
+# Chaos Toolkit (ChaosToken)
 
 [![Version](https://img.shields.io/pypi/v/chaostoolkit-my-extension.svg)](https://img.shields.io/pypi/v/chaostoolkit-lib.svg)
 [![License](https://img.shields.io/pypi/l/chaostoolkit-my-extension.svg)](https://img.shields.io/pypi/l/chaostoolkit-lib.svg)
@@ -6,8 +6,6 @@
 [![Build, Test, and Lint](https://github.com/chaostoolkit/chaostoolkit-extension-template/actions/workflows/build.yaml/badge.svg)](https://github.com/chaostoolkit/chaostoolkit-extension-template/actions/workflows/build.yaml)
 [![Python versions](https://img.shields.io/pypi/pyversions/chaostoolkit-my-extension.svg)](https://www.python.org/)
 
-This project should be used as a starting point to create your own
-Chaos Toolkit extension.
 
 ## Install
 
@@ -19,7 +17,7 @@ environment where [chaostoolkit][] already lives.
 [chaostoolkit]: https://github.com/chaostoolkit/chaostoolkit
 
 ```
-$ pip install chaostoolkit-<your extension name>
+$ pip install git+https://github.com/deceptiveChaos/chaosToken.git
 ```
 
 
@@ -27,13 +25,33 @@ $ pip install chaostoolkit-<your extension name>
 
 <Explain your probes and actions usage from the experiment.json here>
 
-That's it!
+To use the probes and actions from this package, add the following to your experiment file:
+```
+{
+      "type": "action",
+      "name": "deploy-token",
+      "provider": {
+        "type": "python",
+        "module": "chaosext.actions",
+        "func": "send_files_to_host",
+        "arguments": {
+          "folder_path": "fake_files",
+          "host": "192.168.163.128",
+          "username": "kali",
+          "password": "kali",
+          "remote_folder": "Home",
+          "remote_subfolder": ["Desktop","Documents","Downloads"]
+        }
+      }
+    }
+```
 
 Please explore the code to see existing probes and actions.
 
 ## Configuration
 
 <Specify any extra configuration your extension relies on here>
+Users would need to store the tokens in their own folder and use that folder in "folder_path".
 
 ## Test
 

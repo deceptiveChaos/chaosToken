@@ -46,6 +46,37 @@ To use the probes and actions from this package, add the following to your exper
     }
 ```
 
+```json
+{
+      "type": "action",
+      "name": "deploy-token",
+      "provider": {
+        "type": "python",
+        "module": "chaosext.actions",
+        "func": "send_files_to_hosts",
+        "arguments": {
+          "folder_path": "fake_files",
+          "hosts": [
+            {
+              "host": "192.168.163.129",
+              "username": "kali",
+              "password": "kali",
+              "remote_folder": "Home",
+              "remote_subfolder": ["Desktop","Documents","Downloads"]
+            },
+            {
+              "host": "192.168.163.128",
+              "username": "kali",
+              "password": "kali",
+              "remote_folder": "Home",
+              "remote_subfolder": ["Desktop","Documents","Downloads"]
+            }
+          ]
+        }
+      }
+    }
+```
+
 Please explore the code to see existing probes and actions.
 
 ## Configuration
